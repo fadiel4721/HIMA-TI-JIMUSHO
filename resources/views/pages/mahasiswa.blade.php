@@ -119,18 +119,18 @@
     <div class="mt-5 flex justify-end">
         <nav aria-label="Pagination" class="flex items-center space-x-2">
             <!-- Tombol Sebelumnya -->
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700"><i
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary"><i
                     class='bx bxs-chevron-left'></i></a>
 
             <!-- Halaman -->
-            <a href="#" class="px-3 py-2 border rounded-md bg-blue-500 text-white">1</a>
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700">2</a>
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700">...</a>
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700">9</a>
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700">10</a>
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">1</a>
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">2</a>
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">...</a>
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">9</a>
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">10</a>
 
             <!-- Tombol Selanjutnya -->
-            <a href="#" class="px-3 py-2 border rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700"><i
+            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary"><i
                     class='bx bxs-chevron-right'></i></a>
         </nav>
     </div>

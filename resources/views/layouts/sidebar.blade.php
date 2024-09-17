@@ -65,37 +65,37 @@
             <div class="py-5">
                 <nav id="nav-links" class="space-y-3">
                     <!-- Dashboard -->
-                    <a href="{{ route('dashboard') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-l-3xl 
-                        {{ request()->routeIs('dashboard') ? 'bg-[#F6F6F8]' : 'text-slate-600' }}">
-                        <i class='bx bxs-dashboard text-2xl text-primary'></i>
+                    <a href="{{ route('dashboard') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
+                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
+                        <i class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Dashboard</h1>
                     </a>
                 
                     <!-- Mahasiswa -->
-                    <a href="{{ route('mahasiswa') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-l-3xl 
-                        {{ request()->routeIs('mahasiswa') ? 'bg-[#F6F6F8] text-primary' : 'text-slate-600' }}">
-                        <i class='bx bxs-user text-2xl text-primary'></i>
+                    <a href="{{ route('mahasiswa') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('mahasiswa') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
+                        <i class='bx bxs-user text-2xl {{ request()->routeIs('mahasiswa') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Mahasiswa</h1>
                     </a>
                 
                     <!-- Program Studi -->
-                    <a href="{{ route('prodi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-l-3xl 
-                        {{ request()->routeIs('prodi') ? 'bg-[#F6F6F8] text-primary' : 'text-slate-600' }}">
-                        <i class='bx bxs-graduation text-2xl text-primary'></i>
+                    <a href="{{ route('prodi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
+                        <i class='bx bxs-graduation text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Program Studi</h1>
                     </a>
                 
                     <!-- Kompetensi -->
-                    <a href="{{ route('kompetensi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-l-3xl 
-                        {{ request()->routeIs('kompetensi') ? 'bg-[#F6F6F8] text-primary' : 'text-slate-600' }}">
-                        <i class='bx bxs-certification text-2xl text-primary'></i>
+                    <a href="{{ route('kompetensi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('kompetensi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
+                        <i class='bx bxs-certification text-2xl {{ request()->routeIs('kompetensi') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Kompetensi</h1>
                     </a>
                 
                     <!-- Keahlian -->
-                    <a href="{{ route('keahlian') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-l-3xl 
-                        {{ request()->routeIs('keahlian') ? 'bg-[#F6F6F8] text-primary' : 'text-slate-600' }}">
-                        <i class='bx bxs-briefcase text-2xl text-primary'></i>
+                    <a href="{{ route('keahlian') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('keahlian') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
+                        <i class='bx bxs-briefcase text-2xl {{ request()->routeIs('keahlian') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Keahlian</h1>
                     </a>
                 </nav>
