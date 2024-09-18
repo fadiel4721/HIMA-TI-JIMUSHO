@@ -92,19 +92,12 @@
             <div class="py-5">
                 <nav id="nav-links" class="space-y-3">
                     <!-- Dashboard -->
-<<<<<<< HEAD
-                    <a href="{{ route('dashboard') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
-                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
-                        <i class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
-                        <h1 class="text-[16px]  ">Dashboard</h1>
-=======
                     <a href="{{ route('dashboard') }}"
                         class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
                         {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
                         <i
                             class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Dashboard</h1>
->>>>>>> 00d152bb18053b2cf600e4badcf5321d92b2fffc
                     </a>
 
                     <!-- Mahasiswa -->
@@ -117,17 +110,11 @@
                     </a>
 
                     <!-- Program Studi -->
-<<<<<<< HEAD
-                    <a href="{{ route('prodi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
-                        {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
-                        <i class='bx bxs-graduationf text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
-=======
                     <a href="{{ route('prodi') }}"
                         class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
                         {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
                         <i
                             class='bx bxs-graduation text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
->>>>>>> 00d152bb18053b2cf600e4badcf5321d92b2fffc
                         <h1 class="text-[16px]">Program Studi</h1>
                     </a>
 
