@@ -18,10 +18,19 @@
     <style>
         #sidebar {
             transition: width 0.3s;
+            /* align-items: center; */
         }
 
         #sidebar.collapsed {
-            width: 60px;
+            width: 70px;
+        }
+
+        #sidebar.collapsed #sidebar-title {
+            transition: width 0.3s;
+        }
+
+        #sidebar.collapsed #sidebar-title #sidebar-logo {
+            display: none;
         }
 
         #main-content {
@@ -29,15 +38,32 @@
         }
 
         #main-content.collapsed {
-            margin-left: 60px;
+            margin-left: 80px;
+        }
+
+        .nav-item.collapsed {
+            display: flex;
+            align-items: center;
+            /* Memposisikan ikon di tengah secara vertikal */
+        }
+        .nav-item.collapsed i {
+            margin-left: -3px;
         }
 
         .nav-item.collapsed h1 {
             display: none;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .nav-item h1 {
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         .nav-item i {
             transition: font-size 0.3s;
+            transition: margin-left 0.3s;
         }
 
         .nav-item.collapsed i {
@@ -57,7 +83,8 @@
                     <img id="sidebar-logo" src="{{ asset('images/logo.png') }}" width="150" alt="Logo" />
                 </div>
                 <div>
-                    <i id="toggle-button" class="bx bx-chevron-left text-2xl absolute -right-4 px-1 rounded-full shadow bg-white cursor-pointer"></i>
+                    <i id="toggle-button"
+                        class="bx bx-chevron-left text-2xl absolute -right-4 px-1 rounded-full shadow bg-white cursor-pointer"></i>
                 </div>
             </div>
 
@@ -65,41 +92,64 @@
             <div class="py-5">
                 <nav id="nav-links" class="space-y-3">
                     <!-- Dashboard -->
+<<<<<<< HEAD
                     <a href="{{ route('dashboard') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
                         {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
                         <i class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]  ">Dashboard</h1>
+=======
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
+                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
+                        <i
+                            class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
+                        <h1 class="text-[16px]">Dashboard</h1>
+>>>>>>> 00d152bb18053b2cf600e4badcf5321d92b2fffc
                     </a>
-                
+
                     <!-- Mahasiswa -->
-                    <a href="{{ route('mahasiswa') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
-                        {{ request()->routeIs('mahasiswa') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
-                        <i class='bx bxs-user text-2xl {{ request()->routeIs('mahasiswa') ? 'text-white' : 'text-slate-600' }}'></i>
+                    <a href="{{ route('mahasiswa') }}"
+                        class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('mahasiswa') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"style="margin: 10px">
+                        <i
+                            class='bx bxs-user text-2xl {{ request()->routeIs('mahasiswa') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Mahasiswa</h1>
                     </a>
-                
+
                     <!-- Program Studi -->
+<<<<<<< HEAD
                     <a href="{{ route('prodi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
                         {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
                         <i class='bx bxs-graduationf text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
+=======
+                    <a href="{{ route('prodi') }}"
+                        class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
+                        <i
+                            class='bx bxs-graduation text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
+>>>>>>> 00d152bb18053b2cf600e4badcf5321d92b2fffc
                         <h1 class="text-[16px]">Program Studi</h1>
                     </a>
-                
+
                     <!-- Kompetensi -->
-                    <a href="{{ route('kompetensi') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
-                        {{ request()->routeIs('kompetensi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
-                        <i class='bx bxs-certification text-2xl {{ request()->routeIs('kompetensi') ? 'text-white' : 'text-slate-600' }}'></i>
+                    <a href="{{ route('kompetensi') }}"
+                        class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('kompetensi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"style="margin: 10px">
+                        <i
+                            class='bx bxs-certification text-2xl {{ request()->routeIs('kompetensi') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Kompetensi</h1>
                     </a>
-                
+
                     <!-- Keahlian -->
-                    <a href="{{ route('keahlian') }}" class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
-                        {{ request()->routeIs('keahlian') ? 'bg-blue-700 text-white' : 'text-slate-600' }}">
-                        <i class='bx bxs-briefcase text-2xl {{ request()->routeIs('keahlian') ? 'text-white' : 'text-slate-600' }}'></i>
+                    <a href="{{ route('keahlian') }}"
+                        class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
+                        {{ request()->routeIs('keahlian') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"style="margin: 10px">
+                        <i
+                            class='bx bxs-briefcase text-2xl {{ request()->routeIs('keahlian') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Keahlian</h1>
                     </a>
                 </nav>
-                
+
             </div>
         </div>
     </aside>
