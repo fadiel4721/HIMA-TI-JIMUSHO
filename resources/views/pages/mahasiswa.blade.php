@@ -114,6 +114,9 @@
     </table>
     <!-- Table -->
 
+    {{-- Add Data Modal --}}
+    {{-- Add Data Modal --}}
+
 
     <!-- Pagination -->
     <div class="mt-5 flex justify-end">

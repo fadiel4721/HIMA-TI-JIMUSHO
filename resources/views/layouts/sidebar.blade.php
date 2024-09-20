@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Aset CSS menggunakan Laravel Mix atau Vite -->
     @vite('resources/css/app.css')
@@ -46,6 +47,7 @@
             align-items: center;
             /* Memposisikan ikon di tengah secara vertikal */
         }
+
         .nav-item.collapsed i {
             margin-left: -3px;
         }
@@ -68,6 +70,10 @@
 
         .nav-item.collapsed i {
             font-size: 24px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
@@ -94,7 +100,8 @@
                     <!-- Dashboard -->
                     <a href="{{ route('dashboard') }}"
                         class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
-                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
+                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"
+                        style="margin: 10px">
                         <i
                             class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Dashboard</h1>
@@ -112,7 +119,8 @@
                     <!-- Program Studi -->
                     <a href="{{ route('prodi') }}"
                         class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg
-                        {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
+                        {{ request()->routeIs('prodi') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"
+                        style="margin: 10px">
                         <i
                             class='bx bxs-graduation text-2xl {{ request()->routeIs('prodi') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Program Studi</h1>
