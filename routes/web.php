@@ -22,3 +22,8 @@ Route::get('/kompetensi', function () {
     return view('pages.kompetensi');
 })->name('kompetensi');
 
+Route::get('/testcreate', function () {
+    return view('pages.testcreate');
+})->name('testcreate');
+
+Route::post('/mahasiswa/create', [MahasiswaController::class, 'create']);
