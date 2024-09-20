@@ -1,6 +1,19 @@
 @extends('layouts.sidebar')
 
 @section('content')
+    <style>
+        /* Menghilangkan panah pada input type number */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            /* Untuk Firefox */
+        }
+    </style>
 
     {{-- Header --}}
     <div class="mb-5">
@@ -63,7 +76,8 @@
                 <a href="#" class="font-medium text-sm text-primary">View All</a>
             </div>
             <!-- Create Button -->
-            <div class="px-5 py-1 outline outline-2 outline-primary rounded-lg flex gap-2 items-center cursor-pointer">
+            <div onclick="document.getElementById('createDataModal').classList.remove('hidden')"
+                class="px-5 py-1 outline outline-2 outline-primary rounded-lg flex gap-2 items-center cursor-pointer">
                 <img src="{{ asset('images/create.svg') }}" alt="Create Icon" class="w-7">
                 <a href="#" class="font-medium text-sm text-primary">Create</a>
             </div>
@@ -99,14 +113,16 @@
                     <div x-show="open" class="mt-2 bg-white border border-gray-300 rounded-md shadow-lg absolute right-16">
                         <ul class="px-2 py-2 space-y-1">
                             <!-- Edit Item -->
-                            <li class="text-left rounded-md transition-colors duration-200 hover:bg-green-600 hover:text-white">
+                            <li onclick="document.getElementById('editDataModal').classList.remove('hidden')"
+                                class="text-left rounded-md transition-colors duration-200 hover:bg-green-600 hover:text-white">
                                 <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
                                     <i class='bx bxs-edit text-xl'></i>
                                     <span>Edit</span>
                                 </a>
                             </li>
                             <!-- Delete Item -->
-                            <li class="text-left rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
+                            <li
+                                class="text-left rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
                                 <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
                                     <i class='bx bxs-trash-alt text-xl'></i>
                                     <span>Delete</span>
@@ -119,6 +135,69 @@
         </tbody>
     </table>
     <!-- Table -->
+
+    {{-- Create Data Modal --}}
+    <div id="createDataModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
+        <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-primary">Tambah Program Studi</h2>
+            <form action="" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Nama Prodi</label>
+                    <input type="text" name="nama" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Tingkat</label>
+                    <input type="number" name="tingkat" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Semester</label>
+                    <input type="number" name="semester" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="document.getElementById('createDataModal').classList.add('hidden')"
+                        class="px-4 py-2 bg-red-500 rounded-md text-white">Batal</button>
+                    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- Create Data Modal --}}
+
+    {{-- Edit Data Modal --}}
+    <div id="editDataModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
+        <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-primary">Edit Program Studi</h2>
+            <form action="" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="id" id="editProdiId">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Nama Prodi</label>
+                    <input type="text" name="nama" id="editProdiName" value="Teknologi Informasi" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Tingkat</label>
+                    <input type="number" name="tingkat" id="editProdiTingkat" value="1" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Semester</label>
+                    <input type="number" name="semester" id="editProdiSemester" value="2" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="document.getElementById('editDataModal').classList.add('hidden')"
+                        class="px-4 py-2 bg-red-500 rounded-md text-white">Batal</button>
+                    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- Edit Data Modal --}}
+
 
     <!-- Pagination -->
     <div class="mt-5 flex justify-end">

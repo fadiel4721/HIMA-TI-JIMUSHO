@@ -1,6 +1,19 @@
 @extends('layouts.sidebar')
 
 @section('content')
+    <style>
+        /* Menghilangkan panah pada input type number */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            /* Untuk Firefox */
+        }
+    </style>
 
     {{-- Header --}}
     <div class="mb-5">
@@ -63,7 +76,8 @@
                 <a href="#" class="font-medium text-sm text-primary">View All</a>
             </div>
             <!-- Create Button -->
-            <div class="px-5 py-1 outline outline-2 outline-primary rounded-lg flex gap-2 items-center cursor-pointer">
+            <div onclick="document.getElementById('createDataModal').classList.remove('hidden')"
+                class="px-5 py-1 outline outline-2 outline-primary rounded-lg flex gap-2 items-center cursor-pointer">
                 <img src="{{ asset('images/create.svg') }}" alt="Create Icon" class="w-7">
                 <a href="#" class="font-medium text-sm text-primary">Create</a>
             </div>
@@ -96,23 +110,25 @@
                 <td class="px-4 py-2">85</td>
                 <td class="px-4 py-2 text-center" x-data="{ open: false }" @click.away="open = false">
                     <!-- Button Trigger Dropdown -->
-                    <button @click="open = !open">
+                    <button @click="open = !open" class="relative">
                         <span>Action</span>
                         <i class='bx bxs-chevron-down'></i>
                     </button>
-    
+
                     <!-- Dropdown Menu -->
                     <div x-show="open" class="mt-2 bg-white border border-gray-300 rounded-md shadow-lg absolute right-8">
                         <ul class="px-2 py-2 space-y-1">
                             <!-- Edit Item -->
-                            <li class="text-left rounded-md transition-colors duration-200 hover:bg-green-600 hover:text-white">
+                            <li
+                                class="text-left rounded-md transition-colors duration-200 hover:bg-green-600 hover:text-white">
                                 <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
                                     <i class='bx bxs-edit text-xl'></i>
                                     <span>Edit</span>
                                 </a>
                             </li>
                             <!-- Delete Item -->
-                            <li class="text-left rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
+                            <li
+                                class="text-left rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
                                 <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
                                     <i class='bx bxs-trash-alt text-xl'></i>
                                     <span>Delete</span>
@@ -124,29 +140,58 @@
             </tr>
         </tbody>
     </table>
-    
     <!-- Table -->
 
-    <!-- Pagination -->
-    <div class="mt-5 flex justify-end">
-        <nav aria-label="Pagination" class="flex items-center space-x-2">
-            <!-- Tombol Sebelumnya -->
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary"><i
-                    class='bx bxs-chevron-left'></i></a>
-
-            <!-- Halaman -->
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">1</a>
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">2</a>
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">...</a>
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">9</a>
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary">10</a>
-
-            <!-- Tombol Selanjutnya -->
-            <a href="#" class="px-2 py-1 border rounded-md outline outline-1 outline-primary"><i
-                    class='bx bxs-chevron-right'></i></a>
-        </nav>
+    {{-- Create Data Modal --}}
+    <div id="createDataModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
+        <div class="bg-white w-1/2 p-5 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-primary">Tambah Kompetensi</h2>
+            <form action="" method="POST">
+                @csrf
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">ID Kompetensi</label>
+                            <input type="text" name="id_kompetensi" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">ID Prodi</label>
+                            <input type="number" name="id_prodi" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Bahasa</label>
+                            <input type="text" name="bahasa" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Jenis</label>
+                            <input type="text" name="jenis" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Level</label>
+                            <input type="text" name="level" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Skor</label>
+                            <input type="number" name="skor" required
+                                class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button"
+                        onclick="document.getElementById('createDataModal').classList.add('hidden')"
+                        class="px-4 py-2 bg-red-500 text-white rounded-md mr-2">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <!-- Pagination -->
-
-    {{-- JS --}}
+    {{-- Create Data Modal --}}
 @endsection
