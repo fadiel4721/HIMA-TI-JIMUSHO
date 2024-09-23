@@ -90,7 +90,7 @@
 
     {{-- Main Statistik --}}
     <div class="grid grid-cols-2 gap-6 mt-6">
-        <div class="w-full h-[350px] bg-white rounded-xl p-4">
+        <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md border-2 border-slate-200" style="max-height: 1000px">
             <h1 class="text-xl font-medium text-primary">Data Mahasiswa</h1>
             <div class="flex justify-between items-center">
                 <div class="mt-2">
@@ -122,41 +122,174 @@
 
             {{-- Grafik --}}
             <div class="mt-4">
-                <canvas id="mahasiswaChart" width="400" height="200"></canvas>
+                <canvas id="mahasiswaChart" width="400px" height="300px"></canvas>
             </div>
         </div>
 
         <div class="grid grid-cols-2 gap-6">
-            <div class="p-3 w-full bg-white rounded-xl">
+            <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md border-2 border-slate-200"
+                style="max-height: 1000px">
                 <h1 class="text-xl font-medium text-primary">Program Studi</h1>
+                <div class="mt-4">
+                    <canvas id="prodiChart" width="220px" height="220px"></canvas>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="mt-8">
+                        <div class="flex gap-2 items-center">
+                            <img src="{{ asset('images/bj.svg') }}" alt="">
+                            <p style="font-size: 14px">Bahasa Jepang</p>
+                        </div>
+                        <div class="flex gap-2 items-center mt-1">
+                            <img src="{{ asset('images/ti.svg') }}" alt="">
+                            <p style="font-size: 14px">Teknologi Informasi</p>
+                        </div>
+                        <div class="flex gap-2 items-center mt-1">
+                            <img src="{{ asset('images/meka.svg') }}" alt="">
+                            <p style="font-size: 14px">Mekatronika</p>
+                        </div>
+                        <div class="flex gap-2 items-center mt-1">
+                            <img src="{{ asset('images/bd.svg') }}" alt="">
+                            <p style="font-size: 14px">Bisnis Digital</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="p-3 w-full bg-white rounded-xl">
+            <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md border-2 border-slate-200"
+                style="max-height: 1000px">
                 <h1 class="text-xl font-medium text-primary">Kompetensi Bahasa</h1>
+                <div class="mt-4">
+                    <canvas id="bahasaChart" width="220px" height="220px"></canvas>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="mt-8">
+                        <div class="flex gap-2 items-center">
+                            <img src="{{ asset('images/bj.svg') }}" alt="">
+                            <p style="font-size: 14px">Bahasa Jepang</p>
+                        </div>
+                        <div class="flex gap-2 items-center mt-1">
+                            <img src="{{ asset('images/inggris.svg') }}" alt="">
+                            <p style="font-size: 14px">Bahasa Inggris</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        var ctx = document.getElementById('mahasiswaChart').getContext('2d');   
+        var ctx = document.getElementById('mahasiswaChart').getContext('2d');
         var mahasiswaChart = new Chart(ctx, {
             type: 'bar', // jenis grafik
             data: {
-                labels: ['Mahasiswa Aktif', 'Mahasiswa Non-Aktif'],
+                labels: ['2022', '2023', '2024'], // Tahun
+                datasets: [{
+                        label: 'Mahasiswa Aktif',
+                        data: [50, 75, 80], // Data mahasiswa aktif
+                        backgroundColor: '#4A90E2', // Warna untuk mahasiswa aktif
+                        borderColor: '#357ABD',
+                        borderWidth: 1,
+                        borderRadius: 10
+                    },
+                    {
+                        label: 'Mahasiswa Non-Aktif',
+                        data: [5, 7, 10], // Data mahasiswa tidak aktif
+                        backgroundColor: '#E74C3C', // Warna untuk mahasiswa non-aktif
+                        borderColor: '#C0392B',
+                        borderWidth: 1,
+                        borderRadius: 10
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false, // Agar grafik mengikuti ukuran card
+                scales: {
+                    y: {
+                        beginAtZero: true, // Grafik dimulai dari 0
+                        max: 100
+                    }
+                },
+                // plugins: {
+                //     legend: {
+                //         display: false // Menyembunyikan legend
+                //     }
+                // }
+            }
+        });
+
+        // Chart.register(ChartDataLabels);
+
+        var ctx = document.getElementById('prodiChart').getContext('2d');
+        var mahasiswaChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Bahasa Jepang', 'Teknologi Informasi', 'Mekatronika', 'Bisnis Digital'],
                 datasets: [{
                     label: 'Jumlah Mahasiswa',
-                    data: [100, 10], // contoh data
-                    backgroundColor: ['#4A90E2', '#E74C3C'], // warna grafik
-                    borderColor: ['#357ABD', '#C0392B'],
-                    borderWidth: 1
+                    data: [30, 15, 25, 20],
+                    backgroundColor: ['#17CA14', '#2C2C2C', '#E42222', '#FFC700'],
+                    borderWidth: 1,
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true // grafik dimulai dari 0
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'center',
+                        color: 'white',
+                        font: {
+                            size: 14, // Ukuran font
+                            weight: 'bold' // Ketebalan font
+                        },
+                        formatter: function(value, context) {
+                            var total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            var percentage = ((value / total) * 100).toFixed(2) + '%';
+                            return percentage;
+                        }
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        var ctx = document.getElementById('bahasaChart').getContext('2d');
+        var mahasiswaChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Bahasa Jepang', 'Bahasa Inggris'],
+                datasets: [{
+                    label: 'Jumlah Mahasiswa',
+                    data: [50, 75],
+                    backgroundColor: ['#17CA14', '#0000FF'],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'center',
+                        color: 'white',
+                        font: {
+                            size: 14, // Ukuran font
+                            weight: 'bold' // Ketebalan font
+                        },
+                        formatter: function(value, context) {
+                            var total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            var percentage = ((value / total) * 100).toFixed(2) + '%';
+                            return percentage;
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
         });
     </script>
 @endsection
