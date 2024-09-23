@@ -12,6 +12,7 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <!-- Aset CSS menggunakan Laravel Mix atau Vite -->
     @vite('resources/css/app.css')
