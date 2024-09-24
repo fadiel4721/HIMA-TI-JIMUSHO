@@ -28,6 +28,12 @@
     </div>
     {{-- Header --}}
 
+    @if (session('success'))
+        <div class="mb-4 p-4 text-green-700 bg-green-100 rounded-md">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- Search -->
     <div class="mb-5 relative">
         <img src="{{ asset('images/search.svg') }}" class="absolute top-1 left-2">
@@ -97,41 +103,55 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="text-center">
-                <td class="px-4 py-2">1</td>
-                <td class="px-4 py-2">Teknologi Informasi</td>
-                <td class="px-4 py-2">1</td>
-                <td class="px-4 py-2">2</td>
-                <td class="px-4 py-2 text-center" x-data="{ open: false }" @click.away="open = false">
-                    <!-- Button Trigger Dropdown -->
-                    <button @click="open = !open">
-                        <span>Action</span>
-                        <i class='bx bxs-chevron-down'></i>
-                    </button>
+            @foreach ($prodis as $index => $prodi)
+                <tr class="text-center">
+                    <td class="px-4 py-3">{{ $index + 1 }}</td>
+                    <td class="px-4 py-3">{{ $prodi['prodi'] }}</td>
+                    <td class="px-4 py-3">{{ $prodi['tingkat'] }}</td>
+                    <td class="px-4 py-3">{{ $prodi['semester'] }}</td>
+                    <td class="px-4 py-3">
+                        <a onclick="document.getElementById('editDataModal{{ $prodi['id'] }}').classList.remove('hidden')"
+                            href="#" class="">
+                            <i class='bx bxs-edit text-xl'></i>
+                        </a>
+                    </td>
+                </tr>
 
-                    <!-- Dropdown Menu -->
-                    <div x-show="open" class="mt-2 bg-white border border-gray-300 rounded-md shadow-lg absolute right-16">
-                        <ul class="px-2 py-2 space-y-1">
-                            <!-- Edit Item -->
-                            <li onclick="document.getElementById('editDataModal').classList.remove('hidden')"
-                                class="text-left rounded-md transition-colors duration-200 hover:bg-green-600 hover:text-white">
-                                <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
-                                    <i class='bx bxs-edit text-xl'></i>
-                                    <span>Edit</span>
-                                </a>
-                            </li>
-                            <!-- Delete Item -->
-                            <li
-                                class="text-left rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
-                                <a href="#" class="flex items-center gap-2 px-3 py-1 text-gray-700 hover:text-white">
-                                    <i class='bx bxs-trash-alt text-xl'></i>
-                                    <span>Delete</span>
-                                </a>
-                            </li>
-                        </ul>
+                {{-- Edit Data Modal --}}
+                <div id="editDataModal{{ $prodi['id'] }}"
+                    class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
+                    <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg">
+                        <h2 class="text-xl font-semibold mb-4 text-primary">Edit Program Studi</h2>
+                        <form action="{{ route('prodi.update', $prodi['id']) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Nama Prodi</label>
+                                <input type="text" name="nama" value="{{ old('nama', $prodi['prodi']) }}" required
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Tingkat</label>
+                                <input type="number" name="tingkat" value="{{ old('tingkat', $prodi['tingkat']) }}" required
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Semester</label>
+                                <input type="number" name="semester" value="{{ old('semester', $prodi['semester']) }}"
+                                    required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="button"
+                                    onclick="document.getElementById('editDataModal{{ $prodi['id'] }}').classList.add('hidden')"
+                                    class="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-200">Batal</button>
+                                <button type="submit"
+                                    class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200">Simpan</button>
+                            </div>
+                        </form>
                     </div>
-                </td>
-            </tr>
+                </div>
+                {{-- Edit Data Modal --}}
+            @endforeach
         </tbody>
     </table>
     <!-- Table -->
@@ -140,15 +160,17 @@
     <div id="createDataModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
         <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg">
             <h2 class="text-xl font-semibold mb-4 text-primary">Tambah Program Studi</h2>
-            <form action="" method="POST">
+            <form action="{{ route('prodi.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Nama Prodi</label>
-                    <input type="text" name="nama" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <input type="text" name="nama" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Tingkat</label>
-                    <input type="number" name="tingkat" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <input type="number" name="tingkat" required
+                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Semester</label>
@@ -163,40 +185,10 @@
             </form>
         </div>
     </div>
+
     {{-- Create Data Modal --}}
 
-    {{-- Edit Data Modal --}}
-    <div id="editDataModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
-        <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg">
-            <h2 class="text-xl font-semibold mb-4 text-primary">Edit Program Studi</h2>
-            <form action="" method="POST">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id" id="editProdiId">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nama Prodi</label>
-                    <input type="text" name="nama" id="editProdiName" value="Teknologi Informasi" required
-                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tingkat</label>
-                    <input type="number" name="tingkat" id="editProdiTingkat" value="1" required
-                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Semester</label>
-                    <input type="number" name="semester" id="editProdiSemester" value="2" required
-                        class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="document.getElementById('editDataModal').classList.add('hidden')"
-                        class="px-4 py-2 bg-red-500 rounded-md text-white">Batal</button>
-                    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {{-- Edit Data Modal --}}
+
 
 
     <!-- Pagination -->

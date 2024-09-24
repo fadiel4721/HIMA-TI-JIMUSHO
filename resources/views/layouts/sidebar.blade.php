@@ -1,3 +1,4 @@
+<!-- Design by Hima TI -->
 <!doctype html>
 <html>
 
@@ -13,6 +14,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Aset CSS menggunakan Laravel Mix atau Vite -->
     @vite('resources/css/app.css')
@@ -101,8 +105,9 @@
                     <!-- Dashboard -->
                     <a href="{{ route('dashboard') }}"
                         class="nav-item flex items-center gap-[16px] px-4 py-2 rounded-lg 
-                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}" style="margin: 10px">
-                         {{-- <img src="{{asset('images/icon=mahasiswa.svgk')}}" alt=""> --}}
+                        {{ request()->routeIs('dashboard') ? 'bg-blue-700 text-white' : 'text-slate-600' }}"
+                        style="margin: 10px">
+                        {{-- <img src="{{asset('images/icon=mahasiswa.svgk')}}" alt=""> --}}
                         <i
                             class='bx bxs-dashboard text-2xl {{ request()->routeIs('dashboard') ? 'text-white' : 'text-slate-600' }}'></i>
                         <h1 class="text-[16px]">Dashboard</h1>

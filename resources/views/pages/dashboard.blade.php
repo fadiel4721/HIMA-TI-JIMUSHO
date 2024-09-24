@@ -14,21 +14,23 @@
 
     <div class="grid grid-cols-4 gap-6">
         <!-- Card 1 -->
+        <!-- Card 1 -->
         <div class="w-full h-auto bg-white rounded-xl space-y-2 p-4 shadow-md">
             <div class="flex items-center gap-2">
-                {{-- <i class='bx bxs-user text-xl text-primary'></i> --}}
                 <img src="{{ asset('images/icon=mahasiswa.svg') }}" width="25">
                 <p class="text-lg font-medium text-gray-700">Data Mahasiswa</p>
             </div>
             <div class="flex items-center gap-4 mt-2">
-                <h1 class="text-3xl font-medium text-blue-500">1250</h1>
+                <h1 class="text-3xl font-medium text-blue-500">{{ $totalMahasiswa }}</h1>
                 <p
-                    class="outline outline-2  outline-blue-500 px-2 py-1 rounded-full text-sm text-blue-500 flex items-center gap-1">
-                    <i class='bx bx-up-arrow-alt'></i>250
+                    class="outline outline-2 outline-blue-500 px-2 py-1 rounded-full text-sm text-blue-500 flex items-center gap-1">
+                    <i class='bx bx-up-arrow-alt'></i>{{ $dataMahasiswaAktif - $dataMahasiswaNonAktif }}
                 </p>
             </div>
-            <p class="text-sm text-blue-500">250 <span class="text-gray-500">than last month</span></p>
+            <p class="text-sm text-blue-500">{{ $dataMahasiswaNonAktif }} <span class="text-gray-500">than last month</span>
+            </p>
         </div>
+
 
         <!-- Card 2 -->
         <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md space-y-1">
@@ -175,7 +177,6 @@
             </div>
         </div>
     </div>
-
     <script>
         var ctx = document.getElementById('mahasiswaChart').getContext('2d');
         var mahasiswaChart = new Chart(ctx, {
