@@ -177,7 +177,89 @@
             </div>
         </div>
     </div>
+
+    <div class="grid grid-cols-2 gap-6 mt-6">
+        <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md border-2 border-slate-200" style="max-height: 1000px">
+            <h1 class="text-xl font-medium text-primary">Mahasiswa Berdasarkan Semester</h1>
+            <div class="flex justify-between items-center">
+                <div class="mt-7">
+                    <div class="flex gap-2 items-center">
+                        <img src="{{ asset('images/biru.svg') }}" alt="">
+                        <p>Data Mahasiswa</p>
+                    </div>
+                </div>
+                <div class="relative mt-7">
+                    <select name="" id=""
+                        class="w-full p-2 pr-8 rounded bg-slate-100 text-black appearance-none">
+                        <option value="" class="text-primary">2024</option>
+                        <option value="" class="text-primary">2023</option>
+                        <option value="" class="text-primary">2022</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <svg class="h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Grafik --}}
+            <div class="mt-4">
+                <canvas id="semesterChart" width="400px" height="300px"></canvas>
+            </div>
+            <table style="border-collapse: collapse; width: 30%;">
+                <tr>
+                    <td style="padding: 8px; text-align: left;">Semester 1</td>
+                    <td style="padding: 8px; text-align: left;">:</td>
+                    <td style="padding: 8px; text-align: left; color: blue;">350</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left;">Semester 2</td>
+                    <td style="padding: 8px; text-align: left;">:</td>
+                    <td style="padding: 8px; text-align: left; color: blue;">330</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left;">Semester 3</td>
+                    <td style="padding: 8px; text-align: left;">:</td>
+                    <td style="padding: 8px; text-align: left; color: blue;">320</td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <div class="w-full h-auto bg-white rounded-xl p-4 shadow-md border-2 border-slate-200" style="max-height: 1000px">
+            <h1 class="text-xl font-medium text-primary">Kompetensi Keahlian</h1>
+            <div class="flex justify-end items-center">
+                <div class="relative mt-7">
+                    <select name="" id=""
+                        class="w-full p-2 pr-8 rounded bg-slate-100 text-black appearance-none">
+                        <option value="" class="text-primary">Internasional</option>
+                        <option value="" class="text-primary">Nasional</option>
+                        <option value="" class="text-primary">Daerah</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <svg class="h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Grafik --}}
+            <div class="mt-4">
+                <canvas id="kompetensiChart" width="400px" height="300px"></canvas>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Grafik Mahasiswa
         var ctx = document.getElementById('mahasiswaChart').getContext('2d');
         var mahasiswaChart = new Chart(ctx, {
             type: 'bar', // jenis grafik
@@ -206,7 +288,6 @@
                 scales: {
                     y: {
                         beginAtZero: true, // Grafik dimulai dari 0
-                        max: 100
                     }
                 },
                 // plugins: {
@@ -217,8 +298,8 @@
             }
         });
 
-        // Chart.register(ChartDataLabels);
 
+        // Grafik Prodi
         var ctx = document.getElementById('prodiChart').getContext('2d');
         var mahasiswaChart = new Chart(ctx, {
             type: 'doughnut',
@@ -256,6 +337,8 @@
             plugins: [ChartDataLabels]
         });
 
+
+        // Grafik Bahasa
         var ctx = document.getElementById('bahasaChart').getContext('2d');
         var mahasiswaChart = new Chart(ctx, {
             type: 'doughnut',
@@ -291,6 +374,70 @@
                 }
             },
             plugins: [ChartDataLabels]
+        });
+
+
+        // Grafik Tahun
+        var ctx = document.getElementById('semesterChart').getContext('2d');
+        var dataMahasiswa = [25, 50, 45];
+        var mahasiswaChart = new Chart(ctx, {
+            type: 'bar', // jenis grafik
+            data: {
+                labels: ['Tahun 1', 'Tahun 2', 'Tahun 3'],
+                datasets: [{
+                    label: 'Jumlah Mahasiswa',
+                    data: dataMahasiswa,
+                    backgroundColor: '#4A90E2',
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    barThickness: 70
+                }]
+            },
+            options: {
+                maintainAspectRatio: false, // Agar grafik mengikuti ukuran card
+                scales: {
+                    y: {
+                        beginAtZero: true, // Grafik dimulai dari 0
+                    }
+                },
+                // plugins: {
+                //     legend: {
+                //         display: false // Menyembunyikan legend
+                //     }
+                // }
+            }
+        });
+
+
+        // Grafik Kompetensi
+        var ctx = document.getElementById('kompetensiChart').getContext('2d');
+        var mahasiswaChart = new Chart(ctx, {
+            type: 'bar', // jenis grafik
+            data: {
+                labels: ['Coding', 'Desain', 'Mekanik', 'Marketing', 'Komputer'],
+                datasets: [{
+                    label: 'Jumlah Mahasiswa',
+                    data: [50, 62, 32, 45, 30],
+                    backgroundColor: ['#2C2C2C', '#17CA14', '#E42222', '#FFC700', '#389EFF'],
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                maintainAspectRatio: false, // Agar grafik mengikuti ukuran card
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true, // Grafik dimulai dari 0
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Menyembunyikan legend
+                    }
+                }
+            }
         });
     </script>
 @endsection
